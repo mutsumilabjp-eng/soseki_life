@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="辞めたい、残りたい、その前に。仕事の迷いを4つの問いで言葉にする、夏目の整理シート。">
+    <title>辞めたい、その前に。｜夏目</title>
+    <link rel="stylesheet" href="/shigoto-seiri/styles.css">
+  </head>
+  <body>
+    <main>
+      <section class="hero section" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">夏目｜仕事の迷いを、言葉にする</p>
+          <h1 id="hero-title">辞めたい。でも、<br>決められない。<span>その気持ちを、<br>少しずつほどく。</span></h1>
+          <p class="lead">仕事に違和感がある。疲れている。でも、辞めると決めるほどではない。そんな時のために、いまの気持ちを4つの問いで見つめます。</p>
+          <a class="button button-primary" href="#worksheet-form">気持ちを整理してみる</a>
+          <p class="caption">登録も送信もありません。書けるところだけで大丈夫です。</p>
+          <a class="text-link" id="example-link" href="#example">どんなふうに書けばいい？　記入例を見る</a>
+        </div>
+        <figure class="hero-figure"><img class="hero-image" src="/shigoto-seiri/hero-window.webp" width="900" height="900" alt="窓辺と湯飲みの静かな水彩画"></figure>
+      </section>
+
+      <section class="section section-rule" aria-labelledby="axes-title">
+        <p class="section-kicker">まずは、分けてみる</p>
+        <h2 id="axes-title">「辞めたい」気持ちを、<br>ほどくために。</h2>
+        <div class="axis-grid">
+          <article class="axis-card"><p class="axis-number">01</p><h3>環境</h3><p>人や部署が変わったら、続けたいと思えそうですか？</p></article>
+          <article class="axis-card"><p class="axis-number">02</p><h3>仕事内容</h3><p>仕事に慣れたあとも、この仕事を続けたいと思えそうですか？</p></article>
+          <article class="axis-card"><p class="axis-number">03</p><h3>疲労</h3><p>少し休めた日は、辞めたい気持ちに変化がありますか？</p></article>
+          <article class="axis-card"><p class="axis-number">04</p><h3>自己評価</h3><p>起きた出来事と、自分につけた評価を分けられそうですか？</p></article>
+        </div>
+        <p class="note">いくつ重なっていても大丈夫です。原因や適性を判定するものではありません。</p>
+      </section>
+
+      <section class="section worksheet" id="worksheet" aria-labelledby="worksheet-title">
+        <p class="section-kicker">いまの気持ちを書く</p>
+        <h2 id="worksheet-title">うまく書く必要はありません。<br>いま浮かぶ言葉で。</h2>
+        <details id="example">
+          <summary>架空の記入例を見る</summary>
+          <div class="example-box">
+            <p><strong>環境：</strong>上からの数字と部下の相談の間に入り、帰宅後も連絡が続く。</p>
+            <p><strong>仕事内容：</strong>仕事そのものより、管理の比重が増えたことに迷っている。</p>
+            <p><strong>疲労：</strong>休日も仕事の通知を見ると、気持ちが休まらない。</p>
+            <p><strong>自己評価：</strong>「ここで弱音を吐くのは、責任を放り出すことだ」と考えていた。</p>
+            <p><strong>今、重く感じること：</strong>環境・疲労</p>
+            <p><strong>今日の一歩：</strong>仕事で変えたいことと、生活で守りたいことを一つずつ書く。</p>
+          </div>
+        </details>
+        <p class="privacy-note"><strong>ここに書いたことは、このページには残りません。</strong>あなたの画面の中だけで、気持ちを整理します。残したい時だけ、あとで自分のメモにコピーしてください。</p>
+        <form id="worksheet-form" novalidate>
+          <div class="field"><label for="environment">環境</label><p id="environment-help">誰との、どんな場面がつらい？</p><textarea id="environment" name="environment" maxlength="300" rows="4" aria-describedby="environment-help"></textarea></div>
+          <div class="field"><label for="work">仕事内容</label><p id="work-help">仕事内容や役割で、いま引っかかっていることは？</p><textarea id="work" name="work" maxlength="300" rows="4" aria-describedby="work-help"></textarea></div>
+          <div class="field"><label for="fatigue">疲労</label><p id="fatigue-help">休めた日と、休めない日で違いはある？</p><textarea id="fatigue" name="fatigue" maxlength="300" rows="4" aria-describedby="fatigue-help"></textarea></div>
+          <div class="field"><label for="self-evaluation">自己評価</label><p id="self-evaluation-help">出来事：相談できなかった／自分に言った言葉：頼りないと思われそう</p><textarea id="self-evaluation" name="selfEvaluation" maxlength="300" rows="4" aria-describedby="self-evaluation-help"></textarea></div>
+          <fieldset class="field"><legend>今、重く感じること</legend><p>いくつでも選べます。「まだ分からない」は、ほかの選択と一緒に選べません。</p><div class="check-grid"><label><input type="checkbox" name="theme" value="環境">環境</label><label><input type="checkbox" name="theme" value="仕事内容">仕事内容</label><label><input type="checkbox" name="theme" value="疲労">疲労</label><label><input type="checkbox" name="theme" value="自己評価">自己評価</label><label class="unknown-option"><input type="checkbox" name="theme" value="まだ分からない">まだ分からない</label></div></fieldset>
+          <p id="form-error" class="form-error" role="alert" hidden>一つだけ書くか、気になる項目を選ぶと、整理メモを作れます。</p>
+          <div class="button-stack"><button class="button button-primary" type="submit">記入内容をまとめる</button><button class="button button-secondary" id="copy-blank" type="button">空欄のシートをコピー</button></div>
+        </form>
+
+        <section id="summary" class="summary" aria-live="polite" tabindex="-1" hidden>
+          <h3>あなたの整理メモ</h3>
+          <pre id="summary-text"></pre>
+          <button class="button button-primary" id="copy-summary-before-action" type="button">整理メモをコピーする</button>
+          <p id="copy-status-before-action" class="copy-status" role="status"></p>
+          <div id="copy-fallback-before-action" class="copy-fallback" hidden><p>長押ししてコピーしてください。</p><textarea id="copy-fallback-text-before-action" readonly rows="12" aria-label="コピー用の整理メモ"></textarea></div>
+        </section>
+        <section id="next-step" class="next-step" aria-labelledby="next-step-title" hidden>
+          <h3 id="next-step-title">今日の一歩を、一つだけ。</h3>
+          <p>今の気持ちに近いものを選んでください。選ばずにメモを持ち帰っても大丈夫です。</p>
+          <div class="action-list" role="radiogroup" aria-label="今日の一歩">
+            <button type="button" class="action-card" data-action="rest" role="radio" aria-checked="false"><span>まず休息や相談を考えたい</span><small>今夜やらなくてよいことを一つ決める、または相談できる人を一人考える。</small></button>
+            <button type="button" class="action-card" data-action="change" role="radio" aria-checked="false"><span>今の職場で変えられることを探したい</span><small>困っている場面と、変えてほしいことを一つずつメモする。</small></button>
+            <button type="button" class="action-card" data-action="explore" role="radio" aria-checked="false"><span>退職・転職・キャリアアップの選択肢を調べたい</span><small>次の仕事で生かしたい経験、変えたい条件、守りたい条件を一つずつ書き出す。</small></button>
+            <button type="button" class="action-card" data-action="keep" role="radio" aria-checked="false"><span>まだ決めずに、整理メモを残したい</span><small>今日はここまでで大丈夫です。気持ちが変わった日に、同じ問いを見直せます。</small></button>
+          </div>
+          <p id="action-guidance" class="action-guidance"></p>
+          <p id="support-note" class="support-note" hidden>心身の不調が続く場合は、このシートだけで判断せず、医療機関・産業医など専門家への相談も検討してください。</p>
+          <button class="button button-primary" id="copy-summary" type="button">整理メモをコピーする</button>
+          <p id="copy-status" class="copy-status" role="status"></p>
+          <div id="copy-fallback" class="copy-fallback" hidden><p>長押ししてコピーしてください。</p><textarea id="copy-fallback-text" readonly rows="12" aria-label="コピー用の整理メモ"></textarea></div>
+        </section>
+        <div class="blank-copy-result" aria-live="polite"><p id="blank-copy-status" class="copy-status" role="status"></p><div id="blank-copy-fallback" class="copy-fallback" hidden><p>長押ししてコピーしてください。</p><textarea id="blank-copy-fallback-text" readonly rows="12" aria-label="空欄のコピー用シート"></textarea></div></div>
+        <noscript>
+          <section class="noscript-sheet" aria-labelledby="noscript-title">
+            <h3 id="noscript-title">空欄の整理シート</h3>
+            <p>JavaScriptを使わない場合は、下の項目を自分のメモに写して使えます。</p>
+            <pre>辞めたい理由の整理メモ
+
+■ 環境
+
+■ 仕事内容
+
+■ 疲労
+
+■ 自己評価
+
+■ 今、重く感じること
+
+■ 今日の一歩</pre>
+          </section>
+        </noscript>
+      </section>
+
+      <section class="section offer-section" id="offers" aria-labelledby="offer-title" hidden>
+        <p class="section-kicker">次の働き方を調べたい方へ</p>
+        <h2 id="offer-title">外の選択肢を、静かに調べる。</h2>
+        <p class="pr-label"><strong>広告／PR</strong><br>以下にはアフィリエイトリンクが含まれます。リンク先で申込み等が行われると、運営者に報酬が入る場合があります。</p>
+        <p>対象条件や利用の流れを確認して、ご自身に合う場合だけ検討してください。</p>
+        <div id="offer-list" class="offer-list"></div>
+      </section>
+
+      <section class="section about" aria-labelledby="about-title">
+        <p class="section-kicker">夏目について</p>
+        <h2 id="about-title">仕事の迷いを、<br>少し離れたところから。</h2>
+        <p>夏目は、辞めたいのに決められない気持ちを、文学を手がかりに言葉にするアカウントです。</p>
+        <a class="article-link" id="note-link" href="https://note.com/soseki_life/n/nc3f1900f7530" target="_blank" rel="noopener">『坊っちゃん』から考える会社との相性 <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+    <footer><p>夏目</p><nav><a href="https://www.threads.com/@soseki_life" target="_blank" rel="noopener">プロフィール</a><a href="/privacy/">プライバシー</a></nav></footer>
+    <script src="/config/offers.js"></script>
+    <script src="/shigoto-seiri/app.js"></script>
+  </body>
+</html>

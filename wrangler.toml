@@ -1,0 +1,20 @@
+name = "natsume"
+account_id = "97a76d644ffb8abd58978150e8015804"
+main = "src/index.js"
+compatibility_date = "2026-09-10"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "natsume-free-sheet-events"
+database_id = "1e6254ec-2260-40b7-a874-f650548c7446"
+migrations_dir = "migrations"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
+# Only HTML documents and the event endpoint invoke the Worker. CSS, JavaScript,
+# and the WebP are served directly from Assets to preserve the free-tier budget.
+run_worker_first = ["/", "/api/*", "/shigoto-seiri", "/shigoto-seiri/", "/privacy", "/privacy/"]

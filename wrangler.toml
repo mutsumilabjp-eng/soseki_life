@@ -1,5 +1,5 @@
 name = "natsume"
-account_id = "97a76d644ffb8abd58978150e8015804"
+account_id = "8cd7ecdaf8eb44bf0d12bd406fa9d0dd"
 main = "src/index.js"
 compatibility_date = "2026-09-10"
 workers_dev = true
@@ -7,7 +7,7 @@ workers_dev = true
 [[d1_databases]]
 binding = "DB"
 database_name = "natsume-free-sheet-events"
-database_id = "1e6254ec-2260-40b7-a874-f650548c7446"
+database_id = "0e39f606-3a5e-4743-a45d-654435f88a8c"
 migrations_dir = "migrations"
 
 [assets]

@@ -1,0 +1,32 @@
+name: Deploy Natsume Cloudflare
+
+on:
+  push:
+    paths:
+      - "public/**"
+      - "src/**"
+      - "wrangler.toml"
+      - ".github/workflows/deploy-cloudflare.yml"
+      - "cloudflare-deploy-trigger.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Deploy Worker and static assets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "CLOUDFLARE_API_TOKEN is missing"
+            exit 2
+          fi
+          npx --yes wrangler@latest deploy

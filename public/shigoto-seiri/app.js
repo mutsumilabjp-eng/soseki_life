@@ -8,6 +8,7 @@
   const actionGuidance = document.querySelector("#action-guidance");
   const supportNote = document.querySelector("#support-note");
   const offers = document.querySelector("#offers");
+  const offerIntro = document.querySelector("#offer-intro");
   const offerList = document.querySelector("#offer-list");
   const copyStatus = document.querySelector("#copy-status");
   const copyFallback = document.querySelector("#copy-fallback");
@@ -30,6 +31,44 @@
     explore: "次の仕事で生かしたい経験、変えたい条件、守りたい条件を一つずつ書き出す。",
     keep: "今日はここまでで大丈夫です。気持ちが変わった日に、同じ問いを見直せます。",
   };
+
+  // Which "今、重く感じること" theme is driving the visit changes only the
+  // wording that introduces the offer, never whether it appears — that
+  // decision stays with the "今日の一歩" action (see renderOffers below).
+  const offerCopy = {
+    work: [
+      "辞めると決めなくても、今とは違う仕事内容にどんな選択肢があるのかを見ておくことはできます。",
+      "求人を眺めてみるだけでも、「今の仕事で続けたい部分」と「変えたい部分」が見えてくることがあります。",
+      "今すぐ応募したり、転職を決めたりする必要はありません。選択肢を知りたいときだけ、使ってみてください。",
+    ],
+    environment: [
+      "辞めると決めなくても、会社が変わると働き方や環境がどのくらい変わるのかを見ておくことはできます。",
+      "求人を眺めてみるだけでも、「今の職場に残りたい理由」と「次は変えたい条件」が見えてくることがあります。",
+      "今すぐ応募したり、転職を決めたりする必要はありません。選択肢を知りたいときだけ、使ってみてください。",
+    ],
+    selfEvaluation: [
+      "辞めると決めなくても、今の経験が外ではどんな仕事につながるのかを見ておくことはできます。",
+      "求人を眺めてみるだけでも、これまで積んできたことの意外な生かし方が見えてくることがあります。",
+      "今すぐ応募したり、転職を決めたりする必要はありません。選択肢を知りたいときだけ、使ってみてください。",
+    ],
+    default: [
+      "辞めると決めなくても、次にどんな働き方があるのかを見ておくことはできます。",
+      "求人を眺めてみるだけでも、「今の職場に残りたい理由」と「次は変えたい条件」が見えてくることがあります。",
+      "今すぐ応募したり、転職を決めたりする必要はありません。選択肢を知りたいときだけ、使ってみてください。",
+    ],
+  };
+
+  function pickOfferCopy(themes) {
+    if (themes.includes("仕事内容")) return offerCopy.work;
+    if (themes.includes("環境")) return offerCopy.environment;
+    if (themes.includes("自己評価")) return offerCopy.selfEvaluation;
+    return offerCopy.default;
+  }
+
+  // 疲労だけが選ばれている時は、「調べたい」を選んでいても休息・相談を優先する。
+  function fatigueOnly(themes) {
+    return themes.length === 1 && themes[0] === "疲労";
+  }
 
   const blankSheet = () => [
     "辞めたい理由の整理メモ", "", "■ 環境", "", "", "■ 仕事内容", "", "", "■ 疲労", "", "", "■ 自己評価", "", "", "■ 今、重く感じること", "", "", "■ 今日の一歩", "",
@@ -122,10 +161,12 @@
         const selected = item === button;
         item.setAttribute("aria-checked", String(selected));
       });
+      const themes = values().themes;
+      const holdForFatigue = currentAction === "explore" && fatigueOnly(themes);
       actionGuidance.textContent = actions[currentAction];
-      supportNote.hidden = currentAction !== "rest";
+      supportNote.hidden = !(currentAction === "rest" || holdForFatigue);
       summaryText.textContent = memo();
-      renderOffers(currentAction === "explore");
+      renderOffers(currentAction === "explore" && !holdForFatigue, themes);
     });
   });
 
@@ -137,11 +178,12 @@
 
   function isHttpsUrl(value) { try { return new URL(value).protocol === "https:"; } catch { return false; } }
 
-  function renderOffers(shouldShow) {
+  function renderOffers(shouldShow, themes = []) {
     const approvedOffers = validOffers();
     offers.hidden = !shouldShow || approvedOffers.length === 0;
     offerList.replaceChildren();
     if (offers.hidden) return;
+    offerIntro.replaceChildren(...pickOfferCopy(themes).map((line) => { const p = document.createElement("p"); p.textContent = line; return p; }));
     approvedOffers.forEach((offer) => {
       const card = document.createElement("article");
       card.className = "offer-card";
@@ -149,9 +191,11 @@
       const lines = [["できること", offer.description], ["利用条件", offer.conditions], ["合いやすい希望", offer.goodFor], ["対応していない希望", offer.notFor], ["料金", offer.pricing], ["利用の流れ", offer.flow], ["情報の確認日", offer.checkedAt]];
       card.append(title);
       lines.forEach(([label, value]) => { const p = document.createElement("p"); const strong = document.createElement("strong"); strong.textContent = `${label}：`; p.append(strong, document.createTextNode(value)); card.append(p); });
-      const link = document.createElement("a"); link.className = "button button-primary"; link.href = offer.url; link.target = "_blank"; link.rel = "sponsored noopener"; link.textContent = "対象条件と利用の流れを公式サイトで確認";
+      const link = document.createElement("a"); link.className = "button button-primary"; link.href = offer.url; link.target = "_blank"; link.rel = "sponsored noopener";
+      link.textContent = typeof offer.ctaLabel === "string" && offer.ctaLabel.trim() ? offer.ctaLabel : "ほかの働き方を見てみる";
       link.addEventListener("click", () => track("affiliate_click", { offer_id: offer.id }));
-      card.append(link); offerList.append(card);
+      const ctaNote = document.createElement("p"); ctaNote.className = "offer-cta-note"; ctaNote.textContent = "対象条件・料金・流れは、リンク先の公式サイトでご確認いただけます。";
+      card.append(link, ctaNote); offerList.append(card);
       observeOffer(card, offer.id);
     });
     offers.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -172,6 +216,6 @@
     observer.observe(card);
   }
 
-  document.querySelector("#note-link").addEventListener("click", () => track("note_click"));
+  document.querySelectorAll("#note-link, #footer-note-link").forEach((link) => link.addEventListener("click", () => track("note_click")));
   track("page_view");
 })();

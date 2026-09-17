@@ -21,39 +21,10 @@ export default {
       return handleEvent(request, env);
     }
 
-    // The short profile URL is the worksheet itself. Keep the asset files in
-    // their existing directory, but serve its document when someone opens /.
-    const isHome = url.pathname === "/";
-    const assetRequest = isHome
-      ? new Request(new URL("/shigoto-seiri/", url), request)
-      : request;
-    const response = await env.ASSETS.fetch(assetRequest);
-
-    if (isHome && (response.headers.get("Content-Type") || "").includes("text/html")) {
-      const html = await response.text();
-      const enriched = html.replace("</main>", `${articleSection()}\n    </main>`);
-      return withSecurityHeaders(new Response(enriched, {
-        status: response.status,
-        statusText: response.statusText,
-        headers: response.headers,
-      }));
-    }
-
+    const response = await env.ASSETS.fetch(request);
     return withSecurityHeaders(response);
   },
 };
-
-function articleSection() {
-  return `<section class="section about" aria-labelledby="readings-title">
-        <p class="section-kicker">読みもの</p>
-        <h2 id="readings-title">40代の仕事を、<br>文学とデータから。</h2>
-        <p>辞めるか残るかを急いで決める前に。夏目漱石の作品や生涯、公開統計を補助線に、仕事の迷いを分けて考える記事です。</p>
-        <p><a class="article-link" href="/articles/40s-career-rebuild/">40歳、出世するか、生き直すかを考える <span aria-hidden="true">→</span></a></p>
-        <p><a class="article-link" href="/articles/40s-salary-700/">年収700万円を手放すのが怖い。40歳の転職を条件交換として考える <span aria-hidden="true">→</span></a></p>
-        <p><a class="article-link" href="/articles/botchan-workplace-fit/">『坊っちゃん』から考える会社との相性 <span aria-hidden="true">→</span></a></p>
-        <p><a class="article-link" href="/articles/">読みものをすべて見る <span aria-hidden="true">→</span></a></p>
-      </section>`;
-}
 
 async function handleEvent(request, env) {
   if (request.method !== "POST") {
@@ -93,7 +64,6 @@ async function handleEvent(request, env) {
       .bind(jstDate(), eventName, pageVersion, source, offerId, copyType)
       .run();
   } catch {
-    // Client-side features must keep working if statistics collection is unavailable.
     return json({ error: "event_unavailable" }, 503);
   }
 

@@ -84,7 +84,7 @@ function json(body, status = 200, extraHeaders = {}) {
 
 function withSecurityHeaders(response) {
   const headers = new Headers(response.headers);
-  headers.set("Content-Security-Policy", "default-src 'self'; base-uri 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; object-src 'none'; script-src 'self'; style-src 'self'");
+  headers.set("Content-Security-Policy", "default-src 'self'; base-uri 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: https://i.moshimo.com; object-src 'none'; script-src 'self'; style-src 'self'");
   headers.set("Permissions-Policy", "camera=(), geolocation=(), microphone=(), payment=()");
   headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   headers.set("X-Content-Type-Options", "nosniff");

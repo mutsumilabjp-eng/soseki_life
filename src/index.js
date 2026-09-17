@@ -31,7 +31,7 @@ export default {
 
     if (isHome && (response.headers.get("Content-Type") || "").includes("text/html")) {
       const html = await response.text();
-      const enriched = html.replace("<section class=\"section about\"", `${articleSection()}\n      <section class=\"section about\"`);
+      const enriched = html.replace("</main>", `${articleSection()}\n    </main>`);
       return withSecurityHeaders(new Response(enriched, {
         status: response.status,
         statusText: response.statusText,

@@ -148,6 +148,14 @@ footer p { margin: 0 0 10px; }
   .site-header { align-items: flex-start; flex-direction: column; }
   .article-hero { padding: 62px 0 50px; }
   .article-hero::before { top: 120px; left: -10px; height: 56px; }
+  h1 {
+    max-width: 100%;
+    font-size: clamp(29px, 8.2vw, 34px);
+    letter-spacing: .035em;
+    line-height: 1.46;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
   .article-body { padding-top: 40px; }
   h2 { margin-top: 58px; }
   .card { padding: 24px 0; }

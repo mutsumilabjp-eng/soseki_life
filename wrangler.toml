@@ -4,6 +4,12 @@ main = "src/index.js"
 compatibility_date = "2026-09-10"
 workers_dev = true
 
+# お問い合わせフォーム（/privacy/ → POST /api/contact）に必要なCloudflare Secret（値はコード・Gitに置かない）:
+#   npx wrangler secret put RESEND_API_KEY    … Resendの送信用APIキー
+#   npx wrangler secret put CONTACT_TO_EMAIL  … 通知の宛先メールアドレス（ページにもコードにも表示しない）
+# 任意の環境変数（機密ではないので[vars]に書いてよい）:
+#   CONTACT_FROM_EMAIL … 差出人表示。未設定なら "夏目｜soseki_life <onboarding@resend.dev>"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "natsume-free-sheet-events"

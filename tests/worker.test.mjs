@@ -48,12 +48,11 @@ test("sets security headers while serving static assets", async () => {
   assert.equal(response.headers.get("X-Frame-Options"), "DENY");
 });
 
-test("serves the worksheet at the short root URL", async () => {
+test("serves the homepage at the root URL unchanged", async () => {
   const { env, assetRequests } = mockEnv();
   const response = await worker.fetch(new Request("https://example.test/?utm_source=threads"), env);
   assert.equal(response.status, 200);
-  assert.equal(new URL(assetRequests[0].url).pathname, "/shigoto-seiri/");
-  assert.equal(new URL(assetRequests[0].url).search, "");
+  assert.equal(new URL(assetRequests[0].url).pathname, "/");
 });
 
 function contactForm(fields) {

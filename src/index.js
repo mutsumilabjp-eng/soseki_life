@@ -27,12 +27,7 @@ export default {
       return withSecurityHeaders(await handleContact(request, env));
     }
 
-    // The short profile URL is the worksheet itself. Keep the asset files in
-    // their existing directory, but serve its document when someone opens /.
-    const assetRequest = url.pathname === "/"
-      ? new Request(new URL("/shigoto-seiri/", url), request)
-      : request;
-    const response = await env.ASSETS.fetch(assetRequest);
+    const response = await env.ASSETS.fetch(request);
     return withSecurityHeaders(response);
   },
 };
@@ -75,7 +70,6 @@ async function handleEvent(request, env) {
       .bind(jstDate(), eventName, pageVersion, source, offerId, copyType)
       .run();
   } catch {
-    // Client-side features must keep working if statistics collection is unavailable.
     return json({ error: "event_unavailable" }, 503);
   }
 
@@ -179,7 +173,7 @@ function json(body, status = 200, extraHeaders = {}) {
 
 function withSecurityHeaders(response) {
   const headers = new Headers(response.headers);
-  headers.set("Content-Security-Policy", "default-src 'self'; base-uri 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; object-src 'none'; script-src 'self'; style-src 'self'");
+  headers.set("Content-Security-Policy", "default-src 'self'; base-uri 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: https://i.moshimo.com; object-src 'none'; script-src 'self'; style-src 'self'");
   headers.set("Permissions-Policy", "camera=(), geolocation=(), microphone=(), payment=()");
   headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   headers.set("X-Content-Type-Options", "nosniff");

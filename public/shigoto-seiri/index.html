@@ -76,11 +76,12 @@
             <button type="button" class="action-card" data-action="explore" role="radio" aria-checked="false"><span>退職・転職・キャリアアップの選択肢を調べたい</span><small>次の仕事で生かしたい経験、変えたい条件、守りたい条件を一つずつ書き出す。</small></button>
             <button type="button" class="action-card" data-action="keep" role="radio" aria-checked="false"><span>まだ決めずに、整理メモを残したい</span><small>今日はここまでで大丈夫です。気持ちが変わった日に、同じ問いを見直せます。</small></button>
           </div>
-          <p id="action-guidance" class="action-guidance"></p>
-          <p id="support-note" class="support-note" hidden>心身の不調が続く場合は、このシートだけで判断せず、医療機関・産業医など専門家への相談も検討してください。</p>
-          <button class="button button-primary" id="copy-summary" type="button">整理メモをコピーする</button>
-          <p id="copy-status" class="copy-status" role="status"></p>
-          <div id="copy-fallback" class="copy-fallback" hidden><p>長押ししてコピーしてください。</p><textarea id="copy-fallback-text" readonly rows="12" aria-label="コピー用の整理メモ"></textarea></div>
+          <div id="selected-copy" class="selected-copy" hidden>
+            <p>選んだ内容を、手元のメモに残せます。</p>
+            <button class="button button-primary" id="copy-summary" type="button">整理メモをコピーする</button>
+            <p id="copy-status" class="copy-status" role="status"></p>
+            <div id="copy-fallback" class="copy-fallback" hidden><p>長押ししてコピーしてください。</p><textarea id="copy-fallback-text" readonly rows="12" aria-label="コピー用の整理メモ"></textarea></div>
+          </div>
         </section>
         <div class="blank-copy-result" aria-live="polite"><p id="blank-copy-status" class="copy-status" role="status"></p><div id="blank-copy-fallback" class="copy-fallback" hidden><p>長押ししてコピーしてください。</p><textarea id="blank-copy-fallback-text" readonly rows="12" aria-label="空欄のコピー用シート"></textarea></div></div>
         <noscript>
@@ -104,10 +105,18 @@
         </noscript>
       </section>
 
+      <section class="section offer-section" id="pause-guide" aria-labelledby="pause-guide-title" hidden>
+        <p class="section-kicker">疲れが重く感じられる方へ</p>
+        <h2 id="pause-guide-title">選択肢を調べる前に、休息も。</h2>
+        <p>疲労だけが重く感じられる日は、転職の案内を急いで出しません。まずは今夜やらなくてよいことを決め、心身の不調が続く場合は医療機関・産業医など専門家にも相談してください。</p>
+        <div class="copy-slot"></div>
+      </section>
+
       <section class="section offer-section" id="rest-offer" aria-labelledby="rest-offer-title" hidden>
         <p class="section-kicker">休息や相談を考えている方へ</p>
         <h2 id="rest-offer-title">話せる場所も、選択肢の一つ。</h2>
         <p>休むだけでも、身近な人に話すだけでもかまいません。心身の不調が続き、医療機関を探している場合は、地域の医療機関や産業医、公的相談窓口も選べます。</p>
+        <div class="copy-slot"></div>
         <p class="pr-label"><strong>広告／PR</strong><br>以下はアフィリエイト広告です。リンク先で申込み等が行われると、運営者に報酬が入る場合があります。</p>
         <article class="offer-card">
           <h3>エニキュア｜オンライン心療内科・精神科</h3>
@@ -123,6 +132,7 @@
         <p class="section-kicker">いまの職場で変えたい方へ</p>
         <h2 id="change-guide-title">伝える前に、事実を一つ。</h2>
         <p>困った場面を一つ、変えてほしいことを一つ。上司や人事に話す前に、メモを分けておくと伝えやすくなります。勤務時間・賃金・配置転換・ハラスメントなど、職場内では相談しにくいことには公的な相談先もあります。</p>
+        <div class="copy-slot"></div>
         <article class="offer-card">
           <h3>厚生労働省｜総合労働相談コーナー</h3>
           <p>労働問題について、専門の相談員が面談・電話で対応する公的窓口です。相談無料・予約不要。職場に残るか辞めるかを、ここで決める必要はありません。</p>
@@ -134,7 +144,8 @@
       <section class="section offer-section" id="keep-guide" aria-labelledby="keep-guide-title" hidden>
         <p class="section-kicker">まだ決めない方へ</p>
         <h2 id="keep-guide-title">今日は、メモを持ち帰るだけ。</h2>
-        <p>「整理メモをコピーする」から、自分のメモアプリなどへ残せます。入力した内容はサイトには保存されません。必要な日にまた考えられるように、結論を急がず置いておいてください。</p>
+        <p>整理メモを自分のメモアプリなどへ残せます。入力した内容はサイトには保存されません。必要な日にまた考えられるように、結論を急がず置いておいてください。</p>
+        <div class="copy-slot"></div>
         <article class="offer-card">
           <h3>考える材料を、もう少し読みたいとき</h3>
           <p>仕事や働き方の迷いを、別の角度から読める夏目の記事一覧です。今すぐ行動する必要はありません。</p>
@@ -147,6 +158,7 @@
         <p class="section-kicker">次の働き方を調べたい方へ</p>
         <h2 id="offer-title">外の選択肢を、静かに調べる。</h2>
         <div id="offer-intro" class="offer-intro"></div>
+        <div class="copy-slot"></div>
         <p class="pr-label"><strong>広告／PR</strong><br>以下にはアフィリエイトリンクが含まれます。リンク先で申込み等が行われると、運営者に報酬が入る場合があります。</p>
         <div id="offer-list" class="offer-list"></div>
       </section>

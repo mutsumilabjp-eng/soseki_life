@@ -26,7 +26,26 @@
 //     displayEnabled: true,               // set to false to hide without deleting the record
 //   },
 // ];
-window.NATSUME_OFFERS = [];
+// Explore only. A8 partnership and affiliate link: PPC source ledger (2026-09-13).
+// Provider's public eligibility/pricing and scope: checked 2026-09-19.
+// The listing is not a promise of ad-conversion approval; verify the
+// affiliate site's registration and latest program conditions in A8.
+window.NATSUME_OFFERS = [
+  {
+    id: "yumecareer-agent",
+    name: "ユメキャリ転職エージェント",
+    description: "中途転職に向けたキャリア相談・求人紹介・書類添削・面接対策など。",
+    conditions: "中途転職を考えている方。広告案件では学生・外国人雇用・高齢者雇用向けプログラム等は対象外。詳しい利用条件は公式サイトで確認してください。",
+    goodFor: "今の経験を生かせる仕事や、次の職場で変えたい条件を相談したい方。",
+    notFor: "現職の配置・待遇の改善相談だけをしたい方、求人紹介を希望しない方。",
+    pricing: "求職者の登録・相談から内定まで無料（公式案内）。",
+    flow: "無料相談の申込み → カウンセリング → 希望に応じた求人紹介・選考支援。",
+    checkedAt: "2026-09-19（公式案内。ASP提携情報は2026-09-13の記録）",
+    url: "https://px.a8.net/svt/ejp?a8mat=4BC8N5+8DV0YY+5PWS+BX3J6",
+    ctaLabel: "対象条件と無料相談の内容を見る",
+    displayEnabled: true,
+  },
+];
 
   
 // Separate, opt-in consultation information for the "rest / ask for help"

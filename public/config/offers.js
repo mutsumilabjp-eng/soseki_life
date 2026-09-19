@@ -27,3 +27,14 @@
 //   },
 // ];
 window.NATSUME_OFFERS = [];
+
+  
+// Separate, opt-in consultation information for the "rest / ask for help"
+// action only. Not part of the career offers, and never inferred from symptoms.
+// ASP ledger: approved on 2026-07-17; current media/placement rules need periodic
+// review. Provider service and prices checked on 2026-09-19.
+window.NATSUME_REST_OFFER = {
+  id: "anycure-consultation",
+  displayEnabled: true,
+  url: "https://t.afi-b.com/visit.php?a=a16622H-3532168y&p=w985745T",
+};

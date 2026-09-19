@@ -40,7 +40,7 @@ window.NATSUME_OFFERS = [
     notFor: "現職の配置・待遇の改善相談だけをしたい方、求人紹介を希望しない方。",
     pricing: "求職者の登録・相談から内定まで無料（公式案内）。",
     flow: "無料相談の申込み → カウンセリング → 希望に応じた求人紹介・選考支援。",
-    checkedAt: "2026-09-19（公式案内。ASP提携情報は2026-09-13の記録）",
+    checkedAt: "2026-09-19",
     url: "https://px.a8.net/svt/ejp?a8mat=4BC8N5+8DV0YY+5PWS+BX3J6",
     ctaLabel: "対象条件と無料相談の内容を見る",
     displayEnabled: true,

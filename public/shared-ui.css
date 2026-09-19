@@ -57,3 +57,10 @@ footer .icon-link:hover img { opacity: 1; }
   footer { flex-direction: column; gap: 14px; }
   footer nav { justify-content: flex-start; }
 }
+
+/* Shared navigation alignment */
+.site-header.site-chrome, .site-footer.site-chrome { width: min(calc(100% - 40px), 760px); margin-inline: auto; }
+.site-chrome .site-chrome-nav { display:flex; flex-wrap:wrap; align-items:center; gap: 8px 12px; }
+.site-chrome .site-chrome-nav .icon-link { display:inline-flex; align-items:center; justify-content:center; width:24px; height:32px; padding:0; margin-inline:-2px; }
+.site-chrome .site-chrome-nav .icon-link + .icon-link { margin-left:-6px; }
+.site-chrome .site-chrome-nav .icon-link img { width:16px; height:16px; }

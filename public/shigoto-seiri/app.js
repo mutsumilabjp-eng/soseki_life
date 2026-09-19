@@ -12,6 +12,8 @@
   const offerList = document.querySelector("#offer-list");
   const restOffer = document.querySelector("#rest-offer");
   const restOfferLink = document.querySelector("#rest-offer-link");
+  const changeGuide = document.querySelector("#change-guide");
+  const keepGuide = document.querySelector("#keep-guide");
   const copyStatus = document.querySelector("#copy-status");
   const copyFallback = document.querySelector("#copy-fallback");
   const copyFallbackText = document.querySelector("#copy-fallback-text");
@@ -170,6 +172,10 @@
       summaryText.textContent = memo();
       renderOffers(currentAction === "explore" && !holdForFatigue, themes);
       renderRestOffer(currentAction === "rest");
+      changeGuide.hidden = currentAction !== "change";
+      keepGuide.hidden = currentAction !== "keep";
+      if (currentAction === "change") changeGuide.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (currentAction === "keep") keepGuide.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 

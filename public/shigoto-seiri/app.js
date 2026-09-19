@@ -5,8 +5,8 @@
   const summaryText = document.querySelector("#summary-text");
   const nextStep = document.querySelector("#next-step");
   const formError = document.querySelector("#form-error");
-  const actionGuidance = document.querySelector("#action-guidance");
-  const supportNote = document.querySelector("#support-note");
+  const pauseGuide = document.querySelector("#pause-guide");
+  const selectedCopy = document.querySelector("#selected-copy");
   const offers = document.querySelector("#offers");
   const offerIntro = document.querySelector("#offer-intro");
   const offerList = document.querySelector("#offer-list");
@@ -167,15 +167,27 @@
       });
       const themes = values().themes;
       const holdForFatigue = currentAction === "explore" && fatigueOnly(themes);
-      actionGuidance.textContent = actions[currentAction];
-      supportNote.hidden = !(currentAction === "rest" || holdForFatigue);
       summaryText.textContent = memo();
       renderOffers(currentAction === "explore" && !holdForFatigue, themes);
       renderRestOffer(currentAction === "rest");
       changeGuide.hidden = currentAction !== "change";
       keepGuide.hidden = currentAction !== "keep";
-      if (currentAction === "change") changeGuide.scrollIntoView({ behavior: "smooth", block: "start" });
-      if (currentAction === "keep") keepGuide.scrollIntoView({ behavior: "smooth", block: "start" });
+      pauseGuide.hidden = !holdForFatigue;
+      const destination = currentAction === "rest" ? restOffer
+        : currentAction === "change" ? changeGuide
+        : currentAction === "keep" ? keepGuide
+        : holdForFatigue ? pauseGuide
+        : !offers.hidden ? offers : keepGuide;
+      // If the career offer is unavailable, show the memo in a non-ad section.
+      if (destination === keepGuide) keepGuide.hidden = false;
+      destination.querySelector(".copy-slot").append(selectedCopy);
+      selectedCopy.hidden = false;
+      copyStatus.textContent = "";
+      copyFallback.hidden = true;
+      destination.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      });
     });
   });
 
@@ -207,7 +219,6 @@
       card.append(link, ctaNote); offerList.append(card);
       observeOffer(card, offer.id);
     });
-    offers.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function renderRestOffer(shouldShow) {
@@ -218,7 +229,6 @@
     if (!show) return;
     restOfferLink.href = offer.url;
     observeOffer(restOffer, offer.id);
-    restOffer.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   restOfferLink.addEventListener("click", () => {

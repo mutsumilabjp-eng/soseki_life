@@ -64,3 +64,15 @@ footer .icon-link:hover img { opacity: 1; }
 .site-chrome .site-chrome-nav .icon-link { display:inline-flex; align-items:center; justify-content:center; width:24px; height:32px; padding:0; margin-inline:-2px; }
 .site-chrome .site-chrome-nav .icon-link + .icon-link { margin-left:-6px; }
 .site-chrome .site-chrome-nav .icon-link img { width:16px; height:16px; }
+
+.site-header.site-chrome { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 0 15px; border-top:5px double var(--ink,#24221d); border-bottom:1px solid var(--line-light,rgba(111,89,57,.24)); }
+.site-chrome .site-brand { color:var(--ink,#24221d); font-family:var(--serif,serif); font-size:19px; font-weight:700; letter-spacing:.09em; text-decoration:none; white-space:nowrap; }
+.site-chrome .site-chrome-nav { justify-content:flex-end; font-size:13px; line-height:1.5; }
+.site-chrome .site-chrome-nav a { color:var(--indigo,#24434b); text-decoration-color:rgba(38,61,69,.5); text-underline-offset:4px; white-space:nowrap; }
+.site-footer.site-chrome { display:flex; justify-content:space-between; align-items:center; gap:12px 18px; padding:22px 0 34px !important; border-top:1px solid var(--line-light,rgba(111,89,57,.24)) !important; color:var(--muted,#6f675a); font-size:13px; }
+.site-footer.site-chrome p { margin:0 !important; white-space:nowrap; }
+.site-footer.site-chrome .site-brand {font-size:15px;}
+.site-footer.site-chrome .site-tagline {font-size:11px;}
+.site-footer.site-chrome .site-chrome-nav { justify-content:flex-end; gap:3px 12px !important; }
+.site-header.site-chrome + main .hero { border-top:0; }
+@media (max-width:700px){.site-header.site-chrome,.site-footer.site-chrome {flex-direction:column;align-items:flex-start;gap:7px;}.site-header.site-chrome{padding:14px 0 11px;}.site-footer.site-chrome .site-chrome-nav,.site-header.site-chrome .site-chrome-nav{justify-content:flex-start;gap:2px 11px !important;}.site-chrome .site-chrome-nav .icon-link{width:22px;}.site-chrome .site-chrome-nav .icon-link + .icon-link{margin-left:-5px;}}

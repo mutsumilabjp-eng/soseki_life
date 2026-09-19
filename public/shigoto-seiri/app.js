@@ -197,7 +197,7 @@
       const card = document.createElement("article");
       card.className = "offer-card";
       const title = document.createElement("h3"); title.textContent = offer.name;
-      const lines = [["できること", offer.description], ["利用条件", offer.conditions], ["合いやすい希望", offer.goodFor], ["対応していない希望", offer.notFor], ["料金", offer.pricing], ["利用の流れ", offer.flow], ["情報の確認日", offer.checkedAt]];
+      const lines = [["できること", offer.description], ["利用条件", offer.conditions], ["合いやすい希望", offer.goodFor], ["対応していない希望", offer.notFor], ["料金", offer.pricing], ["利用の流れ", offer.flow]];
       card.append(title);
       lines.forEach(([label, value]) => { const p = document.createElement("p"); const strong = document.createElement("strong"); strong.textContent = `${label}：`; p.append(strong, document.createTextNode(value)); card.append(p); });
       const link = document.createElement("a"); link.className = "button button-primary"; link.href = offer.url; link.target = "_blank"; link.rel = "sponsored noopener";

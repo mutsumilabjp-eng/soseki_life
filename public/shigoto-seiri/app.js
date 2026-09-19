@@ -10,6 +10,8 @@
   const offers = document.querySelector("#offers");
   const offerIntro = document.querySelector("#offer-intro");
   const offerList = document.querySelector("#offer-list");
+  const restOffer = document.querySelector("#rest-offer");
+  const restOfferLink = document.querySelector("#rest-offer-link");
   const copyStatus = document.querySelector("#copy-status");
   const copyFallback = document.querySelector("#copy-fallback");
   const copyFallbackText = document.querySelector("#copy-fallback-text");
@@ -167,6 +169,7 @@
       supportNote.hidden = !(currentAction === "rest" || holdForFatigue);
       summaryText.textContent = memo();
       renderOffers(currentAction === "explore" && !holdForFatigue, themes);
+      renderRestOffer(currentAction === "rest");
     });
   });
 
@@ -200,6 +203,22 @@
     });
     offers.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  function renderRestOffer(shouldShow) {
+    const offer = window.NATSUME_REST_OFFER;
+    const show = shouldShow && offer?.displayEnabled === true &&
+      typeof offer.url === "string" && isHttpsUrl(offer.url);
+    restOffer.hidden = !show;
+    if (!show) return;
+    restOfferLink.href = offer.url;
+    observeOffer(restOffer, offer.id);
+    restOffer.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  restOfferLink.addEventListener("click", () => {
+    if (restOffer.hidden || !restOfferLink.href) return;
+    track("affiliate_click", { offer_id: "anycure-consultation" });
+  });
 
   function observeOffer(card, offerId) {
     if (!window.IntersectionObserver) {

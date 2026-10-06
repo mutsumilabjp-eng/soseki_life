@@ -1,0 +1,36 @@
+name: Kohaku asset import
+on:
+  push:
+    paths:
+      - "asset-import/request.json"
+      - ".github/workflows/kohaku-asset-import.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download requested assets
+        run: |
+          python - <<'PY'
+          import json, pathlib, urllib.request
+          req=json.loads(pathlib.Path("asset-import/request.json").read_text())
+          outdir=pathlib.Path("public/kohaku")
+          outdir.mkdir(parents=True,exist_ok=True)
+          for item in req["files"]:
+              with urllib.request.urlopen(item["url"], timeout=60) as r:
+                  data=r.read()
+              if len(data)<1000:
+                  raise RuntimeError("download too small")
+              (outdir/item["name"]).write_bytes(data)
+          PY
+      - name: Commit assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/kohaku
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Add Kohaku post assets"
+          git push

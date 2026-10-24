@@ -119,6 +119,10 @@ h3 { margin: 38px 0 14px; font-size: 21px; }
 }
 .affiliate-button:hover { background: var(--indigo-deep); box-shadow: 3px 4px 0 rgba(42,34,23,.28); transform: translate(-1px,-1px); }
 .affiliate-note { margin: 4px 0 0 !important; color: var(--muted); font-size: 12px; line-height: 1.75; }
+.article-next { margin-top: 56px; padding: 24px 26px; border-top: 1px solid var(--line); background: rgba(255,253,247,.48); }
+.article-next h2 { margin: 0 0 14px; font-size: 22px; }
+.article-next h2::after { display: none; }
+.article-next p:last-child { margin-bottom: 0; }
 .references, .origin { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line-light); color: var(--muted); font-size: 14px; }
 .references h2 { margin: 0 0 16px; font-size: 20px; }
 .references h2::after { display: none; }
@@ -163,3 +167,4 @@ footer p { margin: 0 0 10px; }
   .affiliate-box { padding: 24px 20px; }
   .affiliate-button { display: flex; width: 100%; text-align: center; }
 }
+
